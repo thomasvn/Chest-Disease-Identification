@@ -1,0 +1,12 @@
+# Project
+
+# Virtual Env
+bin
+include
+lib
+share
+.Python
+pip-selfcheck.json
+
+# Misc
+.DS-Store
