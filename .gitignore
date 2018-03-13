@@ -1,4 +1,7 @@
 # Project
+data/images/
+data/images_001.tar.gz
+log.txt
 
 # Virtual Env
 bin
