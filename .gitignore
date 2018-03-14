@@ -2,6 +2,7 @@
 data/images/
 data/images_001.tar.gz
 log.txt
+notes.txt
 
 # Virtual Env
 bin
