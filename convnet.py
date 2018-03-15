@@ -8,7 +8,7 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.utils import np_utils
 from keras.datasets import mnist
 
-NUM_IMG = 100
+NUM_IMG = 60
 
 def get_training_data(train_path, labels_path):
     train_files = []  # gather names of files to train
@@ -25,10 +25,16 @@ def get_training_data(train_path, labels_path):
 
     labels_df = pd.read_csv(labels_path)  # retrieve labels of images
     labels_df = labels_df["Finding Labels"]
-    labels = np.zeros(NUM_IMG)  # labels column vector (0 for no finding, 1 for finding)
+
+    if NUM_IMG > len(train_files):
+        vector_size = len(train_files)
+    else:
+        vector_size = NUM_IMG
+
+    labels = np.zeros(vector_size)  # labels column vector (0 for no finding, 1 for finding)
 
     # adjust labels column vector
-    for i in range(NUM_IMG):
+    for i in range(vector_size):
         if (labels_df[i] == 'No Finding'):
             labels[i] = 0
         else:
@@ -59,7 +65,8 @@ if __name__ == "__main__":
             strides=(2,2), 
             activation='relu',  # rectifier linear unit [f(x) = max(0,x)]
             input_shape=(1024, 1024, 1),  # (samples, rows, cols, channels)
-            data_format='channels_last')
+            data_format='channels_last'
+        )
     )
 
     # Layer 2
@@ -72,10 +79,11 @@ if __name__ == "__main__":
     # Layer 3
     model.add(
         Conv2D(
-            4,  # number of filters
+            8,  # number of filters
             (3, 3),  # kernel size
             strides=(2,2), 
-            activation='relu')
+            activation='relu'
+        )
     )
 
     # Layer 4
@@ -116,7 +124,7 @@ if __name__ == "__main__":
     model.fit(
         x_train,
         y_train,
-        batch_size=10,  # num of samples propogated through network
+        batch_size=20,  # num of samples propogated through network
         epochs=10,  # num of forward and backward pass of all train samples
         shuffle=True,
         verbose=1

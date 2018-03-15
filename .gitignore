@@ -1,6 +1,7 @@
 # Project
 data/images/
 data/images_001.tar.gz
+data/Data_Entry_2017.csv
 log.txt
 notes.txt
 
@@ -14,3 +15,4 @@ pip-selfcheck.json
 
 # Misc
 .DS-Store
+.vscode
